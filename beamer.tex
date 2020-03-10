@@ -1,0 +1,145 @@
+\documentclass[aspectratio=1610,11pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fkssugar}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+
+\author{Adam Krška}
+\title{Fyzikální experiment}
+\usetheme{Madrid}
+%\usecolortheme{rose}
+%\setbeamercovered{transparent} 
+\setbeamertemplate{navigation symbols}{} 
+%\logo{} 
+%\institute{} 
+\date{\today}
+%\subject{sample subject} 
+
+\graphicspath{{./graphics/}{./plot/out/}}
+
+\newcommand{\figplot}[3]{
+	\begin{figure}
+	\centering
+	\input{plot/out/#1}
+	\ifthenelse{\equal{#2}{}}{}{\caption{#2}}
+	\ifthenelse{\equal{#3}{}}{}{\label{#3}}
+	\end{figure}
+}
+
+\newcommand{\figfull}[4][height=0.75\textheight]{
+	\begin{figure}
+	\centering
+	\includegraphics[#1]{#2}
+	\ifthenelse{\equal{#3}{}}{}{\caption{#3}}
+	\ifthenelse{\equal{#4}{}}{}{\label{#4}}
+	\end{figure}
+}
+
+\makeatletter
+\let\myinput\@@input
+\makeatother
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\AtBeginSection[]
+{
+\begin{frame}<beamer>{Table of Contents}
+\tableofcontents[currentsection,currentsubsection, 
+    hideothersubsections, 
+    sectionstyle=show/shaded,
+]
+\end{frame}
+}
+
+%\section{Visible text}
+
+%\begin{frame}{Sample frame title}
+%This is a text in second frame. 
+%For the sake of showing an example.
+%
+%\begin{itemize}
+% \item<1-> Text visible on slide 1
+% \item<2-> Text visible on slide 2
+% \item<3> Text visible on slide 3
+% \item<4-> Text visible on slide 4
+%\end{itemize}
+%
+%\end{frame}
+%
+%\section{Pauses}
+%
+%{
+%\begin{frame}
+% In this slide \pause
+%
+% the text will be partially visible \pause
+%
+% And finally everything will be there
+%\end{frame}
+%}
+
+\section{Important text}
+
+\begin{frame}{Sample frame title}
+In this slide, some important text will be
+\alert{highlighted} because it's important.
+Please, don't abuse it. Please.
+
+\begin{block}{Remark}
+Sample text
+\end{block}
+
+\begin{alertblock}{Important theorem}
+Sample text in red box
+\end{alertblock}
+
+\begin{examples}
+Sample text in green box. The title of the block is \uv{Examples}.
+\end{examples}
+\end{frame}
+
+\section{Tables}
+\begin{frame}{Sample table}
+Text above the table
+
+\begin{table}
+\centering
+\begin{tabular}{cc}
+\myinput table.tex
+\end{tabular}
+\caption{sample table}
+\end{table}
+
+Text below the table
+\end{frame}
+
+\section{Figures}
+
+\subsection{SVG drawing}
+\begin{frame}{Test drawing}
+\figfull{draw1.eps}{Draw test}{}
+\end{frame}
+
+\subsection{GnuPlot plot}
+\begin{frame}{Test ploting}
+\figplot{plot1.tex}{Toto je hodně dlouhý popisek společně s popisky $s$ a $t$ 
+($"\frac{1}{2}at^2 m.s^{-2}"$), 
+abychom mohli pořádně vyzkoušet, jak dobře se popisky pod grafy vejdou.
+}{}
+\end{frame}
+
+\begin{frame}{Test ploting 2}
+\figplot{plot2.tex}{Test plotu z dat}{}
+\end{frame}
+
+\end{document}
